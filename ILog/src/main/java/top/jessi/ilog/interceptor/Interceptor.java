@@ -36,11 +36,11 @@ import top.jessi.ilog.ILog;
  */
 public interface Interceptor {
 
-  /**
-   * Intercept the log.
-   *
-   * @param log the original log
-   * @return the modified log, or null if the log should not be printed
-   */
-  LogItem intercept(LogItem log);
+    /**
+     * Intercept the log.
+     *
+     * @param log the original log
+     * @return the modified log, or null if the log should not be printed
+     */
+    LogItem intercept(LogItem log);
 }

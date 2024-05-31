@@ -16,11 +16,11 @@
 
 package top.jessi.ilog.printer.file.writer;
 
-import top.jessi.ilog.internal.Platform;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+
+import top.jessi.ilog.internal.Platform;
 
 /**
  * A simple implementation of {@link Writer}.
@@ -32,106 +32,106 @@ import java.io.FileWriter;
  */
 public class SimpleWriter extends Writer {
 
-  /**
-   * The name of opened log file.
-   */
-  private String logFileName;
+    /**
+     * The name of opened log file.
+     */
+    private String logFileName;
 
-  /**
-   * The opened log file.
-   */
-  private File logFile;
+    /**
+     * The opened log file.
+     */
+    private File logFile;
 
-  private BufferedWriter bufferedWriter;
+    private BufferedWriter bufferedWriter;
 
-  @Override
-  public boolean open(File file) {
-    logFileName = file.getName();
-    logFile = file;
+    @Override
+    public boolean open(File file) {
+        logFileName = file.getName();
+        logFile = file;
 
-    boolean isNewFile = false;
+        boolean isNewFile = false;
 
-    // Create log file if not exists.
-    if (!logFile.exists()) {
-      try {
-        File parent = logFile.getParentFile();
-        if (!parent.exists()) {
-          parent.mkdirs();
+        // Create log file if not exists.
+        if (!logFile.exists()) {
+            try {
+                File parent = logFile.getParentFile();
+                if (!parent.exists()) {
+                    parent.mkdirs();
+                }
+                logFile.createNewFile();
+                isNewFile = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                close();
+                return false;
+            }
         }
-        logFile.createNewFile();
-        isNewFile = true;
-      } catch (Exception e) {
-        e.printStackTrace();
-        close();
-        return false;
-      }
+
+        // Create buffered writer.
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(logFile, true));
+            if (isNewFile) {
+                onNewFileCreated(logFile);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            close();
+            return false;
+        }
+        return true;
     }
 
-    // Create buffered writer.
-    try {
-      bufferedWriter = new BufferedWriter(new FileWriter(logFile, true));
-      if (isNewFile) {
-        onNewFileCreated(logFile);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      close();
-      return false;
+    @Override
+    public boolean isOpened() {
+        return bufferedWriter != null && logFile.exists();
     }
-    return true;
-  }
 
-  @Override
-  public boolean isOpened() {
-    return bufferedWriter != null && logFile.exists();
-  }
-
-  @Override
-  public File getOpenedFile() {
-    return logFile;
-  }
-
-  @Override
-  public String getOpenedFileName() {
-    return logFileName;
-  }
-
-  /**
-   * Called after a log file is newly created.
-   * <p>
-   * You can do some initialization work to the new file, such as calling {@link #appendLog(String)}
-   * to add a file header.
-   * <p>
-   * Called in worker thread.
-   *
-   * @param file the newly created log file
-   */
-  public void onNewFileCreated(File file) {
-  }
-
-  @Override
-  public void appendLog(String log) {
-    try {
-      bufferedWriter.write(log);
-      bufferedWriter.newLine();
-      bufferedWriter.flush();
-    } catch (Exception e) {
-      Platform.get().warn("append log failed: " + e.getMessage());
+    @Override
+    public File getOpenedFile() {
+        return logFile;
     }
-  }
 
-  @Override
-  public boolean close() {
-    if (bufferedWriter != null) {
-      try {
-        bufferedWriter.close();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    @Override
+    public String getOpenedFileName() {
+        return logFileName;
     }
-    bufferedWriter = null;
-    logFileName = null;
-    logFile = null;
-    return true;
-  }
+
+    /**
+     * Called after a log file is newly created.
+     * <p>
+     * You can do some initialization work to the new file, such as calling {@link #appendLog(String)}
+     * to add a file header.
+     * <p>
+     * Called in worker thread.
+     *
+     * @param file the newly created log file
+     */
+    public void onNewFileCreated(File file) {
+    }
+
+    @Override
+    public void appendLog(String log) {
+        try {
+            bufferedWriter.write(log);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (Exception e) {
+            Platform.get().warn("append log failed: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean close() {
+        if (bufferedWriter != null) {
+            try {
+                bufferedWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        bufferedWriter = null;
+        logFileName = null;
+        logFile = null;
+        return true;
+    }
 }

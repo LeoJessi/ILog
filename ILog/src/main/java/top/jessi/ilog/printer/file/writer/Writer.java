@@ -27,46 +27,46 @@ import java.io.File;
  */
 public abstract class Writer {
 
-  /**
-   * Open a specific log file for future writing, if it doesn't exist yet, just create it.
-   *
-   * @param file the specific log file, may not exist
-   * @return true if the log file is successfully opened, false otherwise
-   */
-  public abstract boolean open(File file);
+    /**
+     * Open a specific log file for future writing, if it doesn't exist yet, just create it.
+     *
+     * @param file the specific log file, may not exist
+     * @return true if the log file is successfully opened, false otherwise
+     */
+    public abstract boolean open(File file);
 
-  /**
-   * Whether a log file is successfully opened in previous {@link #open(File)}.
-   *
-   * @return true if log file is opened, false otherwise
-   */
-  public abstract boolean isOpened();
+    /**
+     * Whether a log file is successfully opened in previous {@link #open(File)}.
+     *
+     * @return true if log file is opened, false otherwise
+     */
+    public abstract boolean isOpened();
 
-  /**
-   * Get the opened log file.
-   *
-   * @return the opened log file, or null if log file not opened
-   */
-  public abstract File getOpenedFile();
+    /**
+     * Get the opened log file.
+     *
+     * @return the opened log file, or null if log file not opened
+     */
+    public abstract File getOpenedFile();
 
-  /**
-   * Get the name of opened log file.
-   *
-   * @return the name of opened log file, or null if log file not opened
-   */
-  public abstract String getOpenedFileName();
+    /**
+     * Get the name of opened log file.
+     *
+     * @return the name of opened log file, or null if log file not opened
+     */
+    public abstract String getOpenedFileName();
 
-  /**
-   * Append the log to the end of the opened log file, normally an extra line separator is needed.
-   *
-   * @param log the log to append
-   */
-  public abstract void appendLog(String log);
+    /**
+     * Append the log to the end of the opened log file, normally an extra line separator is needed.
+     *
+     * @param log the log to append
+     */
+    public abstract void appendLog(String log);
 
-  /**
-   * Make sure the opened log file is closed, normally called before switching the log file.
-   *
-   * @return true if the log file is successfully closed, false otherwise
-   */
-  public abstract boolean close();
+    /**
+     * Make sure the opened log file is closed, normally called before switching the log file.
+     *
+     * @return true if the log file is successfully closed, false otherwise
+     */
+    public abstract boolean close();
 }

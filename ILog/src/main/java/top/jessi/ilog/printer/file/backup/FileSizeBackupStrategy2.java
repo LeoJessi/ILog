@@ -25,28 +25,28 @@ import java.io.File;
  */
 public class FileSizeBackupStrategy2 extends AbstractBackupStrategy {
 
-  private long maxSize;
+    private final long maxSize;
 
-  private int maxBackupIndex;
+    private final int maxBackupIndex;
 
-  /**
-   * Constructor.
-   *
-   * @param maxSize        the max size the file can reach
-   * @param maxBackupIndex the max backup index, or {@link #NO_LIMIT}, see {@link #getMaxBackupIndex()}
-   */
-  public FileSizeBackupStrategy2(long maxSize, int maxBackupIndex) {
-    this.maxSize = maxSize;
-    this.maxBackupIndex = maxBackupIndex;
-  }
+    /**
+     * Constructor.
+     *
+     * @param maxSize        the max size the file can reach
+     * @param maxBackupIndex the max backup index, or {@link #NO_LIMIT}, see {@link #getMaxBackupIndex()}
+     */
+    public FileSizeBackupStrategy2(long maxSize, int maxBackupIndex) {
+        this.maxSize = maxSize;
+        this.maxBackupIndex = maxBackupIndex;
+    }
 
-  @Override
-  public boolean shouldBackup(File file) {
-    return file.length() > maxSize;
-  }
+    @Override
+    public boolean shouldBackup(File file) {
+        return file.length() > maxSize;
+    }
 
-  @Override
-  public int getMaxBackupIndex() {
-    return maxBackupIndex;
-  }
+    @Override
+    public int getMaxBackupIndex() {
+        return maxBackupIndex;
+    }
 }

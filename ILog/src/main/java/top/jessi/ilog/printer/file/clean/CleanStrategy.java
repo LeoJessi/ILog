@@ -9,11 +9,11 @@ import java.io.File;
  */
 public interface CleanStrategy {
 
-  /**
-   * Whether we should clean a specified log file.
-   *
-   * @param file the log file
-   * @return true is we should clean the log file
-   */
-  boolean shouldClean(File file);
+    /**
+     * Whether we should clean a specified log file.
+     *
+     * @param file the log file
+     * @return true is we should clean the log file
+     */
+    boolean shouldClean(File file);
 }

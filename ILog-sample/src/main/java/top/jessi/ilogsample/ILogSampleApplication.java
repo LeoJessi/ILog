@@ -19,8 +19,6 @@ package top.jessi.ilogsample;
 import android.app.Application;
 import android.os.Build;
 
-import org.json.JSONObject;
-
 import java.io.File;
 
 import top.jessi.ilog.ILog;
@@ -30,7 +28,6 @@ import top.jessi.ilog.flattener.ClassicFlattener;
 import top.jessi.ilog.interceptor.BlacklistTagsFilterInterceptor;
 import top.jessi.ilog.libcat.LibCat;
 import top.jessi.ilog.printer.AndroidPrinter;
-import top.jessi.ilog.printer.ConsolePrinter;
 import top.jessi.ilog.printer.Printer;
 import top.jessi.ilog.printer.file.FilePrinter;
 import top.jessi.ilog.printer.file.naming.DateFileNameGenerator;
@@ -121,10 +118,10 @@ public class ILogSampleApplication extends Application {
                 .build();
 
         /*
-        * 初始化 XLog
-        * 指定日志配置，如果不指定，会默认使用 new LogConfiguration.Builder().build()
-        * 添加任意多的打印器。如果没有添加任何打印器，会默认使用 AndroidPrinter(Android)/ConsolePrinter(java)
-        * */
+         * 初始化 XLog
+         * 指定日志配置，如果不指定，会默认使用 new LogConfiguration.Builder().build()
+         * 添加任意多的打印器。如果没有添加任何打印器，会默认使用 AndroidPrinter(Android)/ConsolePrinter(java)
+         * */
         ILog.init(config, androidPrinter, filePrinter);
 
         // For future usage: partial usage in MainActivity.

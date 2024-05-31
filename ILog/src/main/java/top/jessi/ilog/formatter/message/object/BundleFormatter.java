@@ -27,14 +27,14 @@ import top.jessi.ilog.internal.util.ObjectToStringUtil;
  */
 public class BundleFormatter implements ObjectFormatter<Bundle> {
 
-  /**
-   * Format an Bundle object to a string.
-   *
-   * @param data the Bundle object to format
-   * @return the formatted string
-   */
-  @Override
-  public String format(Bundle data) {
-    return ObjectToStringUtil.bundleToString(data);
-  }
+    /**
+     * Format an Bundle object to a string.
+     *
+     * @param data the Bundle object to format
+     * @return the formatted string
+     */
+    @Override
+    public String format(Bundle data) {
+        return ObjectToStringUtil.bundleToString(data);
+    }
 }

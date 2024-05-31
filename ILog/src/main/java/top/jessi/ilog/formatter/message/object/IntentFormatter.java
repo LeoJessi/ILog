@@ -27,14 +27,14 @@ import top.jessi.ilog.internal.util.ObjectToStringUtil;
  */
 public class IntentFormatter implements ObjectFormatter<Intent> {
 
-  /**
-   * Format an Intent object to a string.
-   *
-   * @param data the Intent object to format
-   * @return the formatted string
-   */
-  @Override
-  public String format(Intent data) {
-    return ObjectToStringUtil.intentToString(data);
-  }
+    /**
+     * Format an Intent object to a string.
+     *
+     * @param data the Intent object to format
+     * @return the formatted string
+     */
+    @Override
+    public String format(Intent data) {
+        return ObjectToStringUtil.intentToString(data);
+    }
 }

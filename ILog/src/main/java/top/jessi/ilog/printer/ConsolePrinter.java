@@ -26,22 +26,22 @@ import top.jessi.ilog.internal.DefaultsFactory;
  */
 public class ConsolePrinter implements Printer {
 
-  /**
-   * The log flattener when print a log.
-   */
-  private Flattener2 flattener;
+    /**
+     * The log flattener when print a log.
+     */
+    private final Flattener2 flattener;
 
-  /**
-   * Constructor.
-   */
-  public ConsolePrinter() {
-    this.flattener = DefaultsFactory.createFlattener2();
-  }
+    /**
+     * Constructor.
+     */
+    public ConsolePrinter() {
+        this.flattener = DefaultsFactory.createFlattener2();
+    }
 
 
-  @Override
-  public void println(int logLevel, String tag, String msg) {
-    String flattenedLog = flattener.flatten(System.currentTimeMillis(),logLevel, tag, msg).toString();
-    System.out.println(flattenedLog);
-  }
+    @Override
+    public void println(int logLevel, String tag, String msg) {
+        String flattenedLog = flattener.flatten(System.currentTimeMillis(), logLevel, tag, msg).toString();
+        System.out.println(flattenedLog);
+    }
 }

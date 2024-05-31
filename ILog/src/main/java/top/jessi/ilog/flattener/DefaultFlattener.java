@@ -25,11 +25,11 @@ import top.jessi.ilog.LogLevel;
  */
 public class DefaultFlattener implements Flattener2 {
 
-  @Override
-  public CharSequence flatten(long timeMillis, int logLevel, String tag, String message) {
-    return Long.toString(timeMillis)
-        + '|' + LogLevel.getShortLevelName(logLevel)
-        + '|' + tag
-        + '|' + message;
-  }
+    @Override
+    public CharSequence flatten(long timeMillis, int logLevel, String tag, String message) {
+        return Long.toString(timeMillis)
+                + '|' + LogLevel.getShortLevelName(logLevel)
+                + '|' + tag
+                + '|' + message;
+    }
 }

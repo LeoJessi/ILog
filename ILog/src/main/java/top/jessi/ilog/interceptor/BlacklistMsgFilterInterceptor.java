@@ -21,47 +21,47 @@ import java.util.Arrays;
 import top.jessi.ilog.LogItem;
 
 /**
- * Filter out the logs with a tag that is in the blacklist.
+ * 内容黑名单
  *
- * @since 1.3.0
+ * @since 1.236.8
  */
-public class BlacklistTagsFilterInterceptor extends AbstractFilterInterceptor {
+public class BlacklistMsgFilterInterceptor extends AbstractFilterInterceptor {
 
-    private final Iterable<String> blacklistTags;
+    private final Iterable<String> blacklistMsg;
 
     /**
      * Constructor
      *
-     * @param blacklistTags the blacklist tags, the logs with a tag that is in the blacklist will be
-     *                      filtered out
+     * @param blacklistMsg the blacklist msg, the logs with a msg that is in the blacklist will be
+     *                     filtered out
      */
-    public BlacklistTagsFilterInterceptor(String... blacklistTags) {
-        this(Arrays.asList(blacklistTags));
+    public BlacklistMsgFilterInterceptor(String... blacklistMsg) {
+        this(Arrays.asList(blacklistMsg));
     }
 
     /**
      * Constructor
      *
-     * @param blacklistTags the blacklist tags, the logs with a tag that is in the blacklist will be
-     *                      filtered out
+     * @param blacklistMsg the blacklist msg, the logs with a msg that is in the blacklist will be
+     *                     filtered out
      */
-    public BlacklistTagsFilterInterceptor(Iterable<String> blacklistTags) {
-        if (blacklistTags == null) {
+    public BlacklistMsgFilterInterceptor(Iterable<String> blacklistMsg) {
+        if (blacklistMsg == null) {
             throw new NullPointerException();
         }
-        this.blacklistTags = blacklistTags;
+        this.blacklistMsg = blacklistMsg;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @return true if the tag of the log is in the blacklist, false otherwise
+     * @return true if the msg of the log is in the blacklist, false otherwise
      */
     @Override
     protected boolean reject(LogItem log) {
-        if (blacklistTags != null) {
-            for (String disabledTag : blacklistTags) {
-                if (log.tag.equals(disabledTag)) return true;
+        if (blacklistMsg != null) {
+            for (String disabledMsg : blacklistMsg) {
+                if (log.msg.contains(disabledMsg)) return true;
             }
         }
         return false;

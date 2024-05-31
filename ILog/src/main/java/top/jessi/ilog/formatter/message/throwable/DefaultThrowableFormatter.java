@@ -24,8 +24,8 @@ import top.jessi.ilog.internal.util.StackTraceUtil;
  */
 public class DefaultThrowableFormatter implements ThrowableFormatter {
 
-  @Override
-  public String format(Throwable tr) {
-    return StackTraceUtil.getStackTraceString(tr);
-  }
+    @Override
+    public String format(Throwable tr) {
+        return StackTraceUtil.getStackTraceString(tr);
+    }
 }

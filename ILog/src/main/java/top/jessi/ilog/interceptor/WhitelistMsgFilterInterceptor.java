@@ -21,47 +21,47 @@ import java.util.Arrays;
 import top.jessi.ilog.LogItem;
 
 /**
- * Filter out the logs with a tag that is NOT in the whitelist.
+ * 内容白名单
  *
- * @since 1.3.0
+ * @since 1.236.8
  */
-public class WhitelistTagsFilterInterceptor extends AbstractFilterInterceptor {
+public class WhitelistMsgFilterInterceptor extends AbstractFilterInterceptor {
 
-    private final Iterable<String> whitelistTags;
+    private final Iterable<String> whitelistMsg;
 
     /**
      * Constructor
      *
-     * @param whitelistTags the whitelist tags, the logs with a tag that is NOT in the whitelist
-     *                      will be filtered out
+     * @param whitelistMsg the whitelist msg, the logs with a msg that is NOT in the whitelist
+     *                     will be filtered out
      */
-    public WhitelistTagsFilterInterceptor(String... whitelistTags) {
-        this(Arrays.asList(whitelistTags));
+    public WhitelistMsgFilterInterceptor(String... whitelistMsg) {
+        this(Arrays.asList(whitelistMsg));
     }
 
     /**
      * Constructor
      *
-     * @param whitelistTags the whitelist tags, the logs with a tag that is NOT in the whitelist
-     *                      will be filtered out
+     * @param whitelistMsg the whitelist msg, the logs with a msg that is NOT in the whitelist
+     *                     will be filtered out
      */
-    public WhitelistTagsFilterInterceptor(Iterable<String> whitelistTags) {
-        if (whitelistTags == null) {
+    public WhitelistMsgFilterInterceptor(Iterable<String> whitelistMsg) {
+        if (whitelistMsg == null) {
             throw new NullPointerException();
         }
-        this.whitelistTags = whitelistTags;
+        this.whitelistMsg = whitelistMsg;
     }
 
     /**
      * {@inheritDoc}
      *
-     * @return true if the tag of the log is NOT in the whitelist, false otherwise
+     * @return true if the msg of the log is NOT in the whitelist, false otherwise
      */
     @Override
     protected boolean reject(LogItem log) {
-        if (whitelistTags != null) {
-            for (String enabledTag : whitelistTags) {
-                if (log.tag.equals(enabledTag)) return false;
+        if (whitelistMsg != null) {
+            for (String enabledMsg : whitelistMsg) {
+                if (log.msg.contains(enabledMsg)) return false;
             }
         }
         return true;

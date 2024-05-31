@@ -22,8 +22,8 @@ package top.jessi.ilog.formatter.thread;
  */
 public class DefaultThreadFormatter implements ThreadFormatter {
 
-  @Override
-  public String format(Thread data) {
-    return "Thread: " + data.getName();
-  }
+    @Override
+    public String format(Thread data) {
+        return "Thread: " + data.getName();
+    }
 }

@@ -24,14 +24,14 @@ package top.jessi.ilog.flattener;
  */
 public interface Flattener2 {
 
-  /**
-   * Flatten the log.
-   *
-   * @param timeMillis the time milliseconds of log
-   * @param logLevel  the level of log
-   * @param tag       the tag of log
-   * @param message   the message of log
-   * @return the formatted final log Charsequence
-   */
-  CharSequence flatten(long timeMillis, int logLevel, String tag, String message);
+    /**
+     * Flatten the log.
+     *
+     * @param timeMillis the time milliseconds of log
+     * @param logLevel   the level of log
+     * @param tag        the tag of log
+     * @param message    the message of log
+     * @return the formatted final log Charsequence
+     */
+    CharSequence flatten(long timeMillis, int logLevel, String tag, String message);
 }

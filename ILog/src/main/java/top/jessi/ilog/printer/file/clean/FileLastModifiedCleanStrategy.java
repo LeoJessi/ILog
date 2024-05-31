@@ -9,21 +9,21 @@ import java.io.File;
  */
 public class FileLastModifiedCleanStrategy implements CleanStrategy {
 
-  private long maxTimeMillis;
+    private final long maxTimeMillis;
 
-  /**
-   * Constructor.
-   *
-   * @param maxTimeMillis the max time the file can keep
-   */
-  public FileLastModifiedCleanStrategy(long maxTimeMillis) {
-    this.maxTimeMillis = maxTimeMillis;
-  }
+    /**
+     * Constructor.
+     *
+     * @param maxTimeMillis the max time the file can keep
+     */
+    public FileLastModifiedCleanStrategy(long maxTimeMillis) {
+        this.maxTimeMillis = maxTimeMillis;
+    }
 
-  @Override
-  public boolean shouldClean(File file) {
-    long currentTimeMillis = System.currentTimeMillis();
-    long lastModified = file.lastModified();
-    return (currentTimeMillis - lastModified > maxTimeMillis);
-  }
+    @Override
+    public boolean shouldClean(File file) {
+        long currentTimeMillis = System.currentTimeMillis();
+        long lastModified = file.lastModified();
+        return (currentTimeMillis - lastModified > maxTimeMillis);
+    }
 }

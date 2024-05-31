@@ -28,127 +28,127 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class LogAspect {
 
-  @Pointcut("within(top.jessi.ilog..*)")
-  public void withinIlog() {
-  }
+    @Pointcut("within(top.jessi.ilog..*)")
+    public void withinIlog() {
+    }
 
-  @Pointcut("call(* android.util.Log.v(String, String))")
-  public void call_Log_V_SS() {
-  }
+    @Pointcut("call(* android.util.Log.v(String, String))")
+    public void call_Log_V_SS() {
+    }
 
-  @Pointcut("call(* android.util.Log.v(String, String, Throwable))")
-  public void call_Log_V_SST() {
-  }
+    @Pointcut("call(* android.util.Log.v(String, String, Throwable))")
+    public void call_Log_V_SST() {
+    }
 
-  @Pointcut("call(* android.util.Log.d(String, String))")
-  public void call_Log_D_SS() {
-  }
+    @Pointcut("call(* android.util.Log.d(String, String))")
+    public void call_Log_D_SS() {
+    }
 
-  @Pointcut("call(* android.util.Log.d(String, String, Throwable))")
-  public void call_Log_D_SST() {
-  }
+    @Pointcut("call(* android.util.Log.d(String, String, Throwable))")
+    public void call_Log_D_SST() {
+    }
 
-  @Pointcut("call(* android.util.Log.i(String, String))")
-  public void call_Log_I_SS() {
-  }
+    @Pointcut("call(* android.util.Log.i(String, String))")
+    public void call_Log_I_SS() {
+    }
 
-  @Pointcut("call(* android.util.Log.i(String, String, Throwable))")
-  public void call_Log_I_SST() {
-  }
+    @Pointcut("call(* android.util.Log.i(String, String, Throwable))")
+    public void call_Log_I_SST() {
+    }
 
-  @Pointcut("call(* android.util.Log.w(String, String))")
-  public void call_Log_W_SS() {
-  }
+    @Pointcut("call(* android.util.Log.w(String, String))")
+    public void call_Log_W_SS() {
+    }
 
-  @Pointcut("call(* android.util.Log.w(String, String, Throwable))")
-  public void call_Log_W_SST() {
-  }
+    @Pointcut("call(* android.util.Log.w(String, String, Throwable))")
+    public void call_Log_W_SST() {
+    }
 
-  @Pointcut("call(* android.util.Log.w(String, Throwable))")
-  public void call_Log_W_ST() {
-  }
+    @Pointcut("call(* android.util.Log.w(String, Throwable))")
+    public void call_Log_W_ST() {
+    }
 
-  @Pointcut("call(* android.util.Log.e(String, String))")
-  public void call_Log_E_SS() {
-  }
+    @Pointcut("call(* android.util.Log.e(String, String))")
+    public void call_Log_E_SS() {
+    }
 
-  @Pointcut("call(* android.util.Log.e(String, String, Throwable))")
-  public void call_Log_E_SST() {
-  }
+    @Pointcut("call(* android.util.Log.e(String, String, Throwable))")
+    public void call_Log_E_SST() {
+    }
 
-  @Pointcut("call(* android.util.Log.println(int, String, String))")
-  public void call_Log_Println_ISS() {
-  }
+    @Pointcut("call(* android.util.Log.println(int, String, String))")
+    public void call_Log_Println_ISS() {
+    }
 
-  @Around("call_Log_V_SS() && !withinIlog()")
-  public int cat_Log_V_SS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.v((String) args[0], (String) args[1]);
-  }
+    @Around("call_Log_V_SS() && !withinIlog()")
+    public int cat_Log_V_SS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.v((String) args[0], (String) args[1]);
+    }
 
-  @Around("call_Log_V_SST() && !withinIlog()")
-  public int cat_Log_V_SST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.v((String) args[0], (String) args[1], (Throwable) args[2]);
-  }
+    @Around("call_Log_V_SST() && !withinIlog()")
+    public int cat_Log_V_SST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.v((String) args[0], (String) args[1], (Throwable) args[2]);
+    }
 
-  @Around("call_Log_D_SS() && !withinIlog()")
-  public int cat_Log_D_SS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.d((String) args[0], (String) args[1]);
-  }
+    @Around("call_Log_D_SS() && !withinIlog()")
+    public int cat_Log_D_SS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.d((String) args[0], (String) args[1]);
+    }
 
-  @Around("call_Log_D_SST() && !withinIlog()")
-  public int cat_Log_D_SST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.d((String) args[0], (String) args[1], (Throwable) args[2]);
-  }
+    @Around("call_Log_D_SST() && !withinIlog()")
+    public int cat_Log_D_SST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.d((String) args[0], (String) args[1], (Throwable) args[2]);
+    }
 
-  @Around("call_Log_I_SS() && !withinIlog()")
-  public int cat_Log_I_SS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.i((String) args[0], (String) args[1]);
-  }
+    @Around("call_Log_I_SS() && !withinIlog()")
+    public int cat_Log_I_SS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.i((String) args[0], (String) args[1]);
+    }
 
-  @Around("call_Log_I_SST() && !withinIlog()")
-  public int cat_Log_I_SST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.i((String) args[0], (String) args[1], (Throwable) args[2]);
-  }
+    @Around("call_Log_I_SST() && !withinIlog()")
+    public int cat_Log_I_SST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.i((String) args[0], (String) args[1], (Throwable) args[2]);
+    }
 
-  @Around("call_Log_W_SS() && !withinIlog()")
-  public int cat_Log_W_SS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.w((String) args[0], (String) args[1]);
-  }
+    @Around("call_Log_W_SS() && !withinIlog()")
+    public int cat_Log_W_SS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.w((String) args[0], (String) args[1]);
+    }
 
-  @Around("call_Log_W_SST() && !withinIlog()")
-  public int cat_Log_W_SST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.w((String) args[0], (String) args[1], (Throwable) args[2]);
-  }
+    @Around("call_Log_W_SST() && !withinIlog()")
+    public int cat_Log_W_SST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.w((String) args[0], (String) args[1], (Throwable) args[2]);
+    }
 
-  @Around("call_Log_W_ST() && !withinIlog()")
-  public int cat_Log_W_ST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.w((String) args[0], (Throwable) args[1]);
-  }
+    @Around("call_Log_W_ST() && !withinIlog()")
+    public int cat_Log_W_ST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.w((String) args[0], (Throwable) args[1]);
+    }
 
-  @Around("call_Log_E_SS() && !withinIlog()")
-  public int cat_Log_E_SS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.e((String) args[0], (String) args[1]);
-  }
+    @Around("call_Log_E_SS() && !withinIlog()")
+    public int cat_Log_E_SS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.e((String) args[0], (String) args[1]);
+    }
 
-  @Around("call_Log_E_SST() && !withinIlog()")
-  public int cat_Log_E_SST(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.e((String) args[0], (String) args[1], (Throwable) args[2]);
-  }
+    @Around("call_Log_E_SST() && !withinIlog()")
+    public int cat_Log_E_SST(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.e((String) args[0], (String) args[1], (Throwable) args[2]);
+    }
 
-  @Around("call_Log_Println_ISS() && !withinIlog()")
-  public int cat_Log_Println_ISS(JoinPoint joinPoint) {
-    Object[] args = joinPoint.getArgs();
-    return Cat.println((Integer) args[0], (String) args[1], (String) args[2]);
-  }
+    @Around("call_Log_Println_ISS() && !withinIlog()")
+    public int cat_Log_Println_ISS(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        return Cat.println((Integer) args[0], (String) args[1], (String) args[2]);
+    }
 }

@@ -9,8 +9,8 @@ import java.io.File;
  */
 public class NeverCleanStrategy implements CleanStrategy {
 
-  @Override
-  public boolean shouldClean(File file) {
-    return false;
-  }
+    @Override
+    public boolean shouldClean(File file) {
+        return false;
+    }
 }

@@ -26,8 +26,8 @@ package top.jessi.ilog.printer.file.backup;
  */
 public abstract class AbstractBackupStrategy implements BackupStrategy2 {
 
-  @Override
-  public String getBackupFileName(String fileName, int backupIndex) {
-    return fileName + ".bak." + backupIndex;
-  }
+    @Override
+    public String getBackupFileName(String fileName, int backupIndex) {
+        return fileName + ".bak." + backupIndex;
+    }
 }

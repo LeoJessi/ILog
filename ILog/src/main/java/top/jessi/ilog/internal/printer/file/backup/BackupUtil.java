@@ -16,62 +16,62 @@
 
 package top.jessi.ilog.internal.printer.file.backup;
 
-import top.jessi.ilog.printer.file.backup.BackupStrategy2;
-
 import java.io.File;
+
+import top.jessi.ilog.printer.file.backup.BackupStrategy2;
 
 public class BackupUtil {
 
-  /**
-   * Shift existed backups if needed, and backup the logging file.
-   *
-   * @param loggingFile    the logging file
-   * @param backupStrategy the strategy should be use when backing up
-   */
-  public static void backup(File loggingFile, BackupStrategy2 backupStrategy) {
-    String loggingFileName = loggingFile.getName();
-    String path = loggingFile.getParent();
-    File backupFile;
-    File nextBackupFile;
-    int maxBackupIndex = backupStrategy.getMaxBackupIndex();
-    if (maxBackupIndex > 0) {
-      backupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, maxBackupIndex));
-      if (backupFile.exists()) {
-        backupFile.delete();
-      }
-      for (int i = maxBackupIndex - 1; i > 0; i--) {
-        backupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i));
-        if (backupFile.exists()) {
-          nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i + 1));
-          backupFile.renameTo(nextBackupFile);
+    /**
+     * Shift existed backups if needed, and backup the logging file.
+     *
+     * @param loggingFile    the logging file
+     * @param backupStrategy the strategy should be use when backing up
+     */
+    public static void backup(File loggingFile, BackupStrategy2 backupStrategy) {
+        String loggingFileName = loggingFile.getName();
+        String path = loggingFile.getParent();
+        File backupFile;
+        File nextBackupFile;
+        int maxBackupIndex = backupStrategy.getMaxBackupIndex();
+        if (maxBackupIndex > 0) {
+            backupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, maxBackupIndex));
+            if (backupFile.exists()) {
+                backupFile.delete();
+            }
+            for (int i = maxBackupIndex - 1; i > 0; i--) {
+                backupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i));
+                if (backupFile.exists()) {
+                    nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i + 1));
+                    backupFile.renameTo(nextBackupFile);
+                }
+            }
+            nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, 1));
+            loggingFile.renameTo(nextBackupFile);
+        } else if (maxBackupIndex == BackupStrategy2.NO_LIMIT) {
+            for (int i = 1; i < Integer.MAX_VALUE; i++) {
+                nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i));
+                if (!nextBackupFile.exists()) {
+                    loggingFile.renameTo(nextBackupFile);
+                    break;
+                }
+            }
+        } else {
+            // Illegal maxBackIndex, could not come here.
         }
-      }
-      nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, 1));
-      loggingFile.renameTo(nextBackupFile);
-    } else if (maxBackupIndex == BackupStrategy2.NO_LIMIT) {
-      for (int i = 1; i < Integer.MAX_VALUE; i++) {
-        nextBackupFile = new File(path, backupStrategy.getBackupFileName(loggingFileName, i));
-        if (!nextBackupFile.exists()) {
-          loggingFile.renameTo(nextBackupFile);
-          break;
-        }
-      }
-    } else {
-      // Illegal maxBackIndex, could not come here.
     }
-  }
 
-  /**
-   * Check if a {@link BackupStrategy2} is valid, will throw a exception if invalid.
-   *
-   * @param backupStrategy the backup strategy to be verify
-   */
-  public static void verifyBackupStrategy(BackupStrategy2 backupStrategy) {
-    int maxBackupIndex = backupStrategy.getMaxBackupIndex();
-    if (maxBackupIndex < 0) {
-      throw new IllegalArgumentException("Max backup index should not be less than 0");
-    } else if (maxBackupIndex == Integer.MAX_VALUE) {
-      throw new IllegalArgumentException("Max backup index too big: " + maxBackupIndex);
+    /**
+     * Check if a {@link BackupStrategy2} is valid, will throw a exception if invalid.
+     *
+     * @param backupStrategy the backup strategy to be verify
+     */
+    public static void verifyBackupStrategy(BackupStrategy2 backupStrategy) {
+        int maxBackupIndex = backupStrategy.getMaxBackupIndex();
+        if (maxBackupIndex < 0) {
+            throw new IllegalArgumentException("Max backup index should not be less than 0");
+        } else if (maxBackupIndex == Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Max backup index too big: " + maxBackupIndex);
+        }
     }
-  }
 }

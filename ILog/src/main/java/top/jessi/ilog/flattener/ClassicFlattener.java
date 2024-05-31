@@ -28,9 +28,9 @@ import top.jessi.ilog.LogLevel;
  */
 public class ClassicFlattener extends PatternFlattener {
 
-  private static final String DEFAULT_PATTERN = "{d} {l}/{t}: {m}";
+    private static final String DEFAULT_PATTERN = "{d} {l}/{t}: {m}";
 
-  public ClassicFlattener() {
-    super(DEFAULT_PATTERN);
-  }
+    public ClassicFlattener() {
+        super(DEFAULT_PATTERN);
+    }
 }

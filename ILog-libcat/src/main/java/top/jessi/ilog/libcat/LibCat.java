@@ -29,16 +29,16 @@ import top.jessi.ilog.printer.Printer;
  */
 public class LibCat {
 
-  /**
-   * Config LibCat.
-   *
-   * @param keepOriginLog whether the origin log logged by {@link android.util.Log} should be kept,
-   *                      which means you can still see them in 'logcat', default to be true
-   * @param output        specify a {@link Printer} to print the intercepted logs, can be null if
-   *                      there is no need to print the logs to other place
-   */
-  public static void config(boolean keepOriginLog, Printer output) {
-    Cat.keepOriginLog = keepOriginLog;
-    Cat.output = output;
-  }
+    /**
+     * Config LibCat.
+     *
+     * @param keepOriginLog whether the origin log logged by {@link android.util.Log} should be kept,
+     *                      which means you can still see them in 'logcat', default to be true
+     * @param output        specify a {@link Printer} to print the intercepted logs, can be null if
+     *                      there is no need to print the logs to other place
+     */
+    public static void config(boolean keepOriginLog, Printer output) {
+        Cat.keepOriginLog = keepOriginLog;
+        Cat.output = output;
+    }
 }

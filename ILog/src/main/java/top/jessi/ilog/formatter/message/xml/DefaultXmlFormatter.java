@@ -16,9 +16,6 @@
 
 package top.jessi.ilog.formatter.message.xml;
 
-import top.jessi.ilog.internal.Platform;
-import top.jessi.ilog.internal.SystemCompat;
-
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -29,35 +26,38 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import top.jessi.ilog.internal.Platform;
+import top.jessi.ilog.internal.SystemCompat;
+
 /**
  * Simply format the XML with a indent of {@value XML_INDENT}.
  * <br>TODO: Make indent size and enable/disable state configurable.
  */
 public class DefaultXmlFormatter implements XmlFormatter {
 
-  private static final int XML_INDENT = 4;
+    private static final int XML_INDENT = 4;
 
-  @Override
-  public String format(String xml) {
-    String formattedString;
-    if (xml == null || xml.trim().length() == 0) {
-      Platform.get().warn("XML empty.");
-      return "";
+    @Override
+    public String format(String xml) {
+        String formattedString;
+        if (xml == null || xml.trim().length() == 0) {
+            Platform.get().warn("XML empty.");
+            return "";
+        }
+        try {
+            Source xmlInput = new StreamSource(new StringReader(xml));
+            StreamResult xmlOutput = new StreamResult(new StringWriter());
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
+                    String.valueOf(XML_INDENT));
+            transformer.transform(xmlInput, xmlOutput);
+            formattedString = xmlOutput.getWriter().toString().replaceFirst(">", ">"
+                    + SystemCompat.lineSeparator);
+        } catch (Exception e) {
+            Platform.get().warn(e.getMessage());
+            return xml;
+        }
+        return formattedString;
     }
-    try {
-      Source xmlInput = new StreamSource(new StringReader(xml));
-      StreamResult xmlOutput = new StreamResult(new StringWriter());
-      Transformer transformer = TransformerFactory.newInstance().newTransformer();
-      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-      transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
-          String.valueOf(XML_INDENT));
-      transformer.transform(xmlInput, xmlOutput);
-      formattedString = xmlOutput.getWriter().toString().replaceFirst(">", ">"
-          + SystemCompat.lineSeparator);
-    } catch (Exception e) {
-      Platform.get().warn(e.getMessage());
-      return xml;
-    }
-    return formattedString;
-  }
 }

@@ -16,40 +16,40 @@
 
 package top.jessi.ilog.formatter.message.json;
 
-import top.jessi.ilog.internal.Platform;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import top.jessi.ilog.internal.Platform;
 
 /**
  * Simply format the JSON using {@link JSONObject} and {@link JSONArray}.
  */
 public class DefaultJsonFormatter implements JsonFormatter {
 
-  private static final int JSON_INDENT = 4;
+    private static final int JSON_INDENT = 4;
 
-  @Override
-  public String format(String json) {
-    String formattedString = null;
-    if (json == null || json.trim().length() == 0) {
-      Platform.get().warn("JSON empty.");
-      return "";
+    @Override
+    public String format(String json) {
+        String formattedString = null;
+        if (json == null || json.trim().length() == 0) {
+            Platform.get().warn("JSON empty.");
+            return "";
+        }
+        try {
+            if (json.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(json);
+                formattedString = jsonObject.toString(JSON_INDENT);
+            } else if (json.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(json);
+                formattedString = jsonArray.toString(JSON_INDENT);
+            } else {
+                Platform.get().warn("JSON should start with { or [");
+                return json;
+            }
+        } catch (Exception e) {
+            Platform.get().warn(e.getMessage());
+            return json;
+        }
+        return formattedString;
     }
-    try {
-      if (json.startsWith("{")) {
-        JSONObject jsonObject = new JSONObject(json);
-        formattedString = jsonObject.toString(JSON_INDENT);
-      } else if (json.startsWith("[")) {
-        JSONArray jsonArray = new JSONArray(json);
-        formattedString = jsonArray.toString(JSON_INDENT);
-      } else {
-        Platform.get().warn("JSON should start with { or [");
-        return json;
-      }
-    } catch (Exception e) {
-      Platform.get().warn(e.getMessage());
-      return json;
-    }
-    return formattedString;
-  }
 }

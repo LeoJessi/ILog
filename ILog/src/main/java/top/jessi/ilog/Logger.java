@@ -52,12 +52,12 @@ public class Logger {
     /**
      * The log configuration which you should respect to when logging.
      */
-    private LogConfiguration logConfiguration;
+    private final LogConfiguration logConfiguration;
 
     /**
      * The log printer used to print the logs.
      */
-    private Printer printer;
+    private final Printer printer;
 
     /**
      * Construct a logger.

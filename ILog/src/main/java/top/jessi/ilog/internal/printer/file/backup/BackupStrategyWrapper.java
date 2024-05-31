@@ -16,10 +16,10 @@
 
 package top.jessi.ilog.internal.printer.file.backup;
 
+import java.io.File;
+
 import top.jessi.ilog.printer.file.backup.BackupStrategy;
 import top.jessi.ilog.printer.file.backup.BackupStrategy2;
-
-import java.io.File;
 
 /**
  * Wrap a {@link BackupStrategy} to fit the {@link BackupStrategy2} interface, and perform like
@@ -27,24 +27,24 @@ import java.io.File;
  */
 public class BackupStrategyWrapper implements BackupStrategy2 {
 
-  private BackupStrategy backupStrategy;
+    private final BackupStrategy backupStrategy;
 
-  public BackupStrategyWrapper(BackupStrategy backupStrategy) {
-    this.backupStrategy = backupStrategy;
-  }
+    public BackupStrategyWrapper(BackupStrategy backupStrategy) {
+        this.backupStrategy = backupStrategy;
+    }
 
-  @Override
-  public int getMaxBackupIndex() {
-    return 1;
-  }
+    @Override
+    public int getMaxBackupIndex() {
+        return 1;
+    }
 
-  @Override
-  public String getBackupFileName(String fileName, int backupIndex) {
-    return fileName + ".bak";
-  }
+    @Override
+    public String getBackupFileName(String fileName, int backupIndex) {
+        return fileName + ".bak";
+    }
 
-  @Override
-  public boolean shouldBackup(File file) {
-    return backupStrategy.shouldBackup(file);
-  }
+    @Override
+    public boolean shouldBackup(File file) {
+        return backupStrategy.shouldBackup(file);
+    }
 }

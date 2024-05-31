@@ -25,8 +25,8 @@ import java.io.File;
  */
 public class NeverBackupStrategy implements BackupStrategy {
 
-  @Override
-  public boolean shouldBackup(File file) {
-    return false;
-  }
+    @Override
+    public boolean shouldBackup(File file) {
+        return false;
+    }
 }
